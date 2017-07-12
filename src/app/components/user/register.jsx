@@ -16,6 +16,7 @@ class UserRegister extends Component {
     onFormSubmit(event) {
         event.preventDefault();
 
+        const firstName = this.refs.firstName.value;
         const email = this.refs.email.value;
         const password = this.refs.password.value;
         this.props.registerUser({ email, password }).then((data) => {
@@ -35,6 +36,13 @@ class UserRegister extends Component {
                 <form id="frmRegister" role="form" onSubmit={this.onFormSubmit}>
                     <p>{this.state.message}</p>
                     <h2>Register</h2>
+                    <div className="form-group">
+                        <label htmlFor="txtFirstName">First Name</label>
+                        <input
+                            type="text" className="form-control" ref="firstName" id="txtFirstName" placeholder="Bob"
+                            name="firstName"
+                        />
+                    </div>
                     <div className="form-group">
                         <label htmlFor="txtRegEmail">Email address</label>
                         <input

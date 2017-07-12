@@ -21,9 +21,10 @@ class UserProfile extends Component {
 
     onFormSubmit(event) {
         event.preventDefault();
+        const firstName = this.refs.firstName.value;
         const email = this.refs.email.value;
-        const displayName = this.refs.displayName.value;
-        this.props.updateUser({ email, displayName }).then((data) => {
+        //const displayName = this.refs.displayName.value;
+        this.props.updateUser({ email, firstName }).then((data) => {
             if (data.payload.errorCode) {
                 this.setState({ message: data.payload.errorMessage });
             } else {
@@ -47,20 +48,27 @@ class UserProfile extends Component {
                     <p>{this.state.message}</p>
                     <br />
                     <div className="form-group">
+                        <label htmlFor="firstName">First Name: </label>
+                        <input
+                            type="text" defaultValue={this.props.currentUser.firstName}
+                            className="form-control" id="email" ref="firstName" placeholder={this.props.currentUser.firstName} name="firstName"
+                        />
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="email">Email: </label>
                         <input
                           type="text" defaultValue={this.props.currentUser.email}
                           className="form-control" id="email" ref="email" placeholder="Email" name="email"
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="displayName">Display name: </label>
-                        <input
-                          type="text" defaultValue={this.props.currentUser.displayName}
-                          className="form-control" ref="displayName" id="displayName" placeholder="Display name"
-                          name="displayName"
-                        />
-                    </div>
+                    {/*<div className="form-group">*/}
+                        {/*<label htmlFor="displayName">Display name: </label>*/}
+                        {/*<input*/}
+                          {/*type="text" defaultValue={this.props.currentUser.displayName}*/}
+                          {/*className="form-control" ref="displayName" id="displayName" placeholder="Display name"*/}
+                          {/*name="displayName"*/}
+                        {/*/>*/}
+                    {/*</div>*/}
                     <button type="submit" className="btn btn-primary">Update</button>
                 </form>
                 <ChangePassword />
